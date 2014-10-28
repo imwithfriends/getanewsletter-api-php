@@ -1,0 +1,16 @@
+{
+    "name": "getanewsletter/api-php",
+    "description": "",
+    "version": "0.1.0",
+    "support": {
+        "email": "support@getanewsletter.com"
+    },
+    "require": {
+        "nategood/httpful": "0.2.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Gan": "src/"
+        }
+    }
+}
