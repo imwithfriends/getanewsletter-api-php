@@ -13,7 +13,8 @@
     },
     "autoload": {
         "psr-4": {
-            "Gan": "src/"
+            "Gan\\": "src/",
+            "Gan\\Tests\\": "tests/"
         }
     }
 }
