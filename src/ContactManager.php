@@ -2,10 +2,13 @@
 
 namespace Gan;
 
+/**
+ * Entity manager for contacts.
+ */
 class ContactManager extends EntityManager
 {
     protected $basePath = 'contacts';
-    protected $entityClass = 'Gan\Contact';
+    protected $entityClass = '\Gan\Contact';
     protected $writableFields = [
         'attributes',
         'first_name',

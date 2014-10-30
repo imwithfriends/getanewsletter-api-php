@@ -2,6 +2,9 @@
 
 namespace Gan;
 
+/**
+ * Represents a list of subscribers.
+ */
 class Newsletter extends Entity
 {
     public $email;
