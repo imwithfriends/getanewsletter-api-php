@@ -75,7 +75,7 @@ abstract class EntityManager
      * @return string The resource path.
      * @throws \Exception if the lookup field is empty.
      */
-    protected function lookupPath(Entity $entity)
+    protected function lookupPath($entity)
     {
         $lookupField = $this->lookupField;
         if (!$entity->$lookupField) {
@@ -95,7 +95,7 @@ abstract class EntityManager
      * @param \stdClass $data The transfer data object from the API.
      * @return \Gan\entityClass The constructed entity.
      */
-    protected function constructEntity($data)
+    public function constructEntity($data)
     {
         $entity = new $this->entityClass();
         foreach (array_keys(get_object_vars($entity)) as $property) {
@@ -117,11 +117,13 @@ abstract class EntityManager
      * @param \Gan\Entity $entity The entity to extract data from.
      * @return \stdClass The transfer data object.
      */
-    protected function normalizeEntity(Entity $entity)
+    public function normalizeEntity($entity)
     {
         $data = new \stdClass();
         foreach ($this->writableFields as $property) {
-            $data->$property = $entity->$property;
+            if (property_exists($entity, $property)) {
+                $data->$property = $entity->$property;
+            }
         }
         return $data;
     }
@@ -154,7 +156,7 @@ abstract class EntityManager
      * @throws \Gan\ApiException if there is an error from the API.
      * @throws \Exception if the normalization fails, i.e. missing lookup field.
      */
-    public function save(Entity $entity, $overwrite = false)
+    public function save($entity, $overwrite = false)
     {
         $data = $this->normalizeEntity($entity);
 
@@ -184,7 +186,7 @@ abstract class EntityManager
      * @throws \Gan\ApiException if there is an error from the API.
      * @throws \Exception if the normalization fails, i.e. missing lookup field.
      */
-    public function overwrite(Entity $entity)
+    public function overwrite($entity)
     {
         return $this->save($entity, true);
     }
@@ -207,7 +209,7 @@ abstract class EntityManager
 
         $result = [];
         foreach ($response->body->results as $data) {
-            $result[] = $this->constructEntity($data);
+            $result[] = $this->constructEntity($data)->setPersisted();
         }
         return $result;
     }
@@ -218,7 +220,7 @@ abstract class EntityManager
      * @param \Gan\Entity $entity The entity to delete.
      * @throws \Gan\ApiException if there is an error from the API.
      */
-    public function delete(Entity $entity)
+    public function delete($entity)
     {
         $this->api->call(Http::DELETE, $this->lookupPath($entity));
     }

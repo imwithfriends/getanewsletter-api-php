@@ -42,7 +42,7 @@ class ContactManagerTests extends PHPUnit_Framework_TestCase
             'attributes' => (object) [],
             'first_name' => 'John',
             'last_name' => null,
-            'lists' => null
+            'lists' => []
         ];
 
         $this->apiMock->expects($this->once())
@@ -67,7 +67,7 @@ class ContactManagerTests extends PHPUnit_Framework_TestCase
             'attributes' => (object) [],
             'first_name' => 'John',
             'last_name' => null,
-            'lists' => null
+            'lists' => []
         ];
 
         $this->apiMock->expects($this->once())
@@ -102,7 +102,7 @@ class ContactManagerTests extends PHPUnit_Framework_TestCase
             'attributes' => (object) [],
             'first_name' => 'John',
             'last_name' => null,
-            'lists' => null
+            'lists' => []
         ];
 
         $this->apiMock->expects($this->once())

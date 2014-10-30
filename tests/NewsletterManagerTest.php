@@ -31,6 +31,7 @@ class NewsletterManagerTests extends PHPUnit_Framework_TestCase
 
         $this->assertEquals('Gan\Newsletter', get_class($list));
         $this->assertEquals('list', $list->name);
+        $this->assertEquals('hash', $list->hash);
         $this->assertTrue($list->isPersisted());
     }
 

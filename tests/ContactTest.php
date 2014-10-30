@@ -10,21 +10,19 @@ class ContactTests extends PHPUnit_Framework_TestCase
     public function testSubscribe()
     {
         $contactResponse = (object) ['body' => (object) ['email' => 'test@example.com']];
-        $listResponse = (object) ['body' => (object) ['hash' => 'hash']];
 
-        $this->apiMock->expects($this->any())
+        $this->apiMock->expects($this->at(0))
                 ->method('call')
                 ->willReturn($contactResponse);
 
         $contactManager = new \Gan\ContactManager($this->apiMock);
         $contact = $contactManager->get('test@example.com');
 
-        $this->apiMock->expects($this->any())
-                ->method('call')
-                ->willReturn($listResponse);
-
         $listManager = new \Gan\NewsletterManager($this->apiMock);
-        $returnedList = $list = $listManager->get('hash');
+        $list = $listManager->constructEntity((object) ['hash' => 'hash']);
+
+        $returnedList = $listManager->normalizeEntity($list);
+        $returnedList->hash = 'hash';
 
         $contact->subscribeTo($list);
 

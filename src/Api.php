@@ -51,7 +51,7 @@ class Api
      * @return \Httpful\Response The response object from the service.
      * @throws \Gan\ApiException
      */
-    public function call($method, $resourcePath, $payload = [])
+    public function call($method, $resourcePath, $payload = null)
     {
         $uri = $this->baseUri . $resourcePath;
 
