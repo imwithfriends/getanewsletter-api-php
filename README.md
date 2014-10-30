@@ -134,6 +134,7 @@ Do not forget that ```email``` is a ***_lookup field_*** and required when updat
 
 #### Deleting a contact
 ```php
+<?php
 
 $contactManager->delete($contact);
 ```
