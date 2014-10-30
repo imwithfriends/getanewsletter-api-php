@@ -16,4 +16,12 @@ class ContactManager extends EntityManager
         'lists'
     ];
     protected $lookupField = 'email';
+
+    protected function normalizeEntity(Entity $entity) {
+        $data = parent::normalizeEntity($entity);
+        if (!is_object($data->attributes)) {
+            $data->attributes = (object) [];
+        }
+        return $data;
+    }
 }
