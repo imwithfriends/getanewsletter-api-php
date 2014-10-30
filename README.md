@@ -33,6 +33,7 @@ Usage
 Start by creating an instance of the ```\Gan\Api``` object:
 ```php
 <?php
+
 $token = '...';
 $gan = new \Gan\Api($token);
 ```
@@ -61,12 +62,14 @@ They have the following fields:
 You have to create an instance of the ```\Gan\ContactManager\``` class and then use it's ```get()``` method to retrieve the contact you need.
 ```php
 <?php
+
 $contactManager = new \Gan\ContactManager($gan);
 $contact = $contactManager->get('john.doe@example.com');
 ```
 The manager methods will throw an ```\Gan\ApiException``` in case of HTTP error from the API, so it's a good idea to catch it.
 ```php
 <?php
+
 try {
     $contact = $contactManager->get('john.doe@example.com');
 } catch (\Gan\ApiException $e) {
@@ -81,6 +84,7 @@ try {
 #### Creating a contact
 ```php
 <?php
+
 $contact = new \Gan\Contact();
 $contact->email = 'jane.doe@example.com';
 $contact->first_name = 'Jane';
@@ -91,6 +95,7 @@ This will create a new contact and save it. Again, it'll be a good idea to catch
 One way to avoid it is to force the creation of the contact, overwriting the existing one:
 ```php
 <?php
+
 $contactManager->overwrite($contact);
 ```
 
@@ -98,6 +103,7 @@ Both ```save()``` and ```overwrite()``` will return the same contact object with
 
 ```php
 <?php
+
 $contact = $contactManager->save($contact);
 echo $contact->created;
 ```
@@ -105,6 +111,7 @@ echo $contact->created;
 #### Updating an existing contact
 ```php
 <?php
+
 // Get the contact.
 $contact = $contactManager->get('john.doe@example.com');
 // Change some fields.
@@ -115,6 +122,7 @@ $contactManager->save($contact);
 You can avoid making two calls to the API by forcing a *partial update*.
 ```php
 <?php
+
 $contact = new \Gan\Contact();
 $contact->setPersisted();
 $contact->email = 'john.doe@example.com';
@@ -126,6 +134,7 @@ Do not forget that ```email``` is a ***_lookup field_*** and required when updat
 
 #### Deleting a contact
 ```php
+
 $contactManager->delete($contact);
 ```
 
@@ -156,6 +165,7 @@ The instances of the \Gan\Newsletter class represent the [lists](http://help.get
 The CRUD operations on lists are no different from the operations on contacts:
 ```php
 <?php
+
 $listManager = new \Gan\NewsletterManager($gan);
 
 // Retrieve a list.
@@ -187,12 +197,14 @@ $listManager->delete($list);
 #### Subscribing a contact to a list
 ```php
 <?php
+
 $contact->subscribeTo($list);
 $contactManager->save($contact);
 ```
 You can also create a new contact automatically subscribed.
 ```php
 <?php
+
 $contact = new \Gan\Contact();
 $contact->email = 'john.doe@example.com';
 $contact->subscribeTo($list);
