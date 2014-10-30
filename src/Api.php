@@ -48,8 +48,8 @@ class Api
      * @param string $method The HTTP method to use (e.g. Http::GET, Http::POST, etc.).
      * @param string $resourcePath The path to the resource (e.g. contacts/john@example.com/)
      * @param string $payload The data that is sent to the service. Not used for GET or DELETE.
-     * @return Httpful\Response The response object from the service.
-     * @throws ApiException
+     * @return \Httpful\Response The response object from the service.
+     * @throws \Gan\ApiException
      */
     public function call($method, $resourcePath, $payload = [])
     {
