@@ -22,6 +22,15 @@ abstract class EntityManager
         return rtrim($this->basePath, '/') . '/' . rtrim($id, '/') . '/';
     }
 
+    private function lookupPath(Entity $entity)
+    {
+        $lookupField = $this->lookupField;
+        if (!$entity->$lookupField) {
+            throw new \Exception('Missing required property: ' . $lookupField);
+        }
+        return $this->getPath($entity->$lookupField);
+    }
+
     protected function constructEntity($data)
     {
         $entity = new $this->entityClass();
@@ -33,15 +42,6 @@ abstract class EntityManager
         return $entity;
     }
 
-    public function get()
-    {
-        $resource = call_user_func_array(array($this, 'getPath'), func_get_args());
-        $response = $this->api->call(Http::GET, $resource);
-        $result = $this->constructEntity($response->body);
-        $result->setPersisted();
-        return $result;
-    }
-
     private function normalizeEntity(Entity $contact)
     {
         $data = new \stdClass();
@@ -51,13 +51,13 @@ abstract class EntityManager
         return $data;
     }
 
-    private function lookupPath(Entity $entity)
+    public function get($id)
     {
-        $lookupField = $this->lookupField;
-        if (!$entity->$lookupField) {
-            throw new \Exception('Missing required property: ' . $lookupField);
-        }
-        return $this->getPath($entity->$lookupField);
+        $resource = $this->getPath($id);
+        $response = $this->api->call(Http::GET, $resource);
+        $result = $this->constructEntity($response->body);
+        $result->setPersisted();
+        return $result;
     }
 
     public function save(Entity $entity, $overwrite = false)
