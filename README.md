@@ -31,7 +31,7 @@ For manual installation you have to obtain the [api-php-0.1.0.phar]() and drop i
 Usage
 -----
 Start by creating an instance of the ```\Gan\Api``` object:
-```PHP
+```php
 $token = '...';
 $gan = new \Gan\Api($token);
 ```
@@ -58,12 +58,12 @@ They have the following fields:
 
 #### Retreiving a contact
 You have to create an instance of the ```\Gan\ContactManager\``` class and then use it's ```get()``` method to retrieve the contact you need.
-```PHP
+```php
 $contactManager = new \Gan\ContactManager($gan);
 $contact = $contactManager->get('john.doe@example.com');
 ```
 The manager methods will throw an ```\Gan\ApiException``` in case of HTTP error from the API, so it's a good idea to catch it.
-```PHP
+```php
 try {
     $contact = $contactManager->get('john.doe@example.com');
 } catch (\Gan\ApiException $e) {
@@ -76,7 +76,7 @@ try {
 ```
 
 #### Creating a contact
-```PHP
+```php
 $contact = new \Gan\Contact();
 $contact->email = 'jane.doe@example.com';
 $contact->first_name = 'Jane';
@@ -85,19 +85,19 @@ $contactManager->save($contact);
 ```
 This will create a new contact and save it. Again, it'll be a good idea to catch exceptions when calling the ```save()``` method. The API will respond with an error if the contact already exists.
 One way to avoid it is to force the creation of the contact, overwriting the existing one:
-```PHP
+```php
 $contactManager->overwrite($contact);
 ```
 
 Both ```save()``` and ```overwrite()``` will return the same contact object with it's read-only fields updated (e.g. ```created```, ```updated```).
 
-```PHP
+```php
 $contact = $contactManager->save($contact);
 echo $contact->created;
 ```
 
 #### Updating an existing contact
-```PHP
+```php
 // Get the contact.
 $contact = $contactManager->get('john.doe@example.com');
 // Change some fields.
@@ -106,7 +106,7 @@ $contact->first_name = 'John';
 $contactManager->save($contact);
 ```
 You can avoid making two calls to the API by forcing a *partial update*.
-```PHP
+```php
 $contact = new \Gan\Contact();
 $contact->setPersisted();
 $contact->email = 'john.doe@example.com';
@@ -117,7 +117,7 @@ Calling ```setPersisted()``` on the contact object marks it like it's already ex
 Do not forget that ```email``` is a ***_lookup field_*** and required when updating or deleting the contact.
 
 #### Deleting a contact
-```PHP
+```php
 $contactManager->delete($contact);
 ```
 
@@ -146,7 +146,7 @@ The instances of the \Gan\Newsletter class represent the [lists](http://help.get
 
 #### Retreiving, creating, updating and deleting a list
 The CRUD operations on lists are no different from the operations on contacts:
-```PHP
+```php
 $listManager = new \Gan\NewsletterManager($gan);
 
 // Retrieve a list.
@@ -176,12 +176,12 @@ $listManager->delete($list);
 ```
 
 #### Subscribing a contact to a list
-```PHP
+```php
 $contact->subscribeTo($list);
 $contactManager->save($contact);
 ```
 You can also create a new contact automatically subscribed.
-```PHP
+```php
 $contact = new \Gan\Contact();
 $contact->email = 'john.doe@example.com';
 $contact->subscribeTo($list);
