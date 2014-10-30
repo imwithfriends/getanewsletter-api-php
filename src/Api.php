@@ -53,7 +53,7 @@ class Api
      */
     public function call($method, $resourcePath, $payload = [])
     {
-        $uri = $this->baseUri . rtrim($resourcePath, '/') . '/';
+        $uri = $this->baseUri . $resourcePath;
 
         Request::ini($this->requestTemplate);
         $request = Request::init($method)->uri($uri);
