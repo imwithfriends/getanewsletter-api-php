@@ -4,8 +4,19 @@ namespace Gan;
 
 use Httpful\Response;
 
+/**
+ * Represents the exception from a failed API call.
+ */
 class ApiException extends \Exception
 {
+    public $response;
+
+    /**
+     * Returns a string representation of the error information.
+     *
+     * @param stdClass $body The data object to parse.
+     * @return string String representation of the error.
+     */
     private static function parse_errors($body)
     {
         if (!is_object($body)) {
@@ -25,9 +36,15 @@ class ApiException extends \Exception
         return trim($errors);
     }
 
+    /**
+     * Constructor.
+     *
+     * @param Response $response The raw response from the API.
+     * @return ApiException
+     */
     public function __construct(Response $response)
     {
-        print $response->body->detail;
+        $this->response = $response;
         $message = '(' . $response->code . ') ' . self::parse_errors($response->body);
         return parent::__construct($message, $response->code, null);
     }
