@@ -29,7 +29,7 @@ class ContactTests extends PHPUnit_Framework_TestCase
         $contact->subscribeTo($list);
 
         $expected = (object) (object) [
-            'attributes' => null,
+            'attributes' => (object) [],
             'first_name' => null,
             'last_name' => null,
             'lists' => [

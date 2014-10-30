@@ -39,7 +39,7 @@ class ContactManagerTests extends PHPUnit_Framework_TestCase
         $contact->first_name = 'John';
 
         $payload = (object) [
-            'attributes' => null,
+            'attributes' => (object) [],
             'first_name' => 'John',
             'last_name' => null,
             'lists' => null
@@ -64,7 +64,7 @@ class ContactManagerTests extends PHPUnit_Framework_TestCase
         $contact->setPersisted();
 
         $payload = (object) [
-            'attributes' => null,
+            'attributes' => (object) [],
             'first_name' => 'John',
             'last_name' => null,
             'lists' => null
@@ -99,7 +99,7 @@ class ContactManagerTests extends PHPUnit_Framework_TestCase
         $contact->first_name = 'John';
 
         $payload = (object) [
-            'attributes' => null,
+            'attributes' => (object) [],
             'first_name' => 'John',
             'last_name' => null,
             'lists' => null
