@@ -200,7 +200,7 @@ abstract class EntityManager
      * @return array The result array of entities.
      * @throws \Gan\ApiException if there is an error from the API.
      */
-    public function query($filters)
+    public function query($filters = [])
     {
         $uri = rtrim($this->basePath, '/') . '/?' . http_build_query($filters);
         $response = $this->api->call(Http::GET, $uri);
