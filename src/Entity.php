@@ -38,5 +38,6 @@ class Entity
     public function setPersisted($persisted = true)
     {
         $this->_persisted = $persisted;
+        return $this;
     }
 }
