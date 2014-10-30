@@ -24,12 +24,17 @@ class ApiException extends \Exception
         }
 
         $errors = '';
-        $vars = get_object_vars($body);
-        foreach ($vars as $error) {
+        $vars = is_object($body) ? get_object_vars($body) : $body;
+        foreach ($vars as $field => $error) {
             if (is_object($error)) {
                 $errors .= self::parse_errors($error) . ' ';
+            } else if (is_array($error)) {
+                $errors .= $field . ': ';
+                foreach ($error as $_error) {
+                    $errors .= $_error . ' ';
+                }
             } else {
-                $errors .= $error . ' ';
+                $errors .= $field . ': ' . $error . ' ';
             }
         }
 
