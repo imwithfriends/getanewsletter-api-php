@@ -2,7 +2,6 @@ API-PHP
 =======
 
 The API-PHP library presents a simple and easy to use interface to the Get a Newsletter's REST API.
-**Warning: It is still in development and unstable!**
 
 Requirements
 ------------
