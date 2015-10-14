@@ -13,15 +13,8 @@ Installation
 
 If your project is supporting [Composer](https://getcomposer.org/) you may use the following in your composer.json file:
 ```json
-"minimum-stability": "dev",
-"repositories": [
-    {
-        "type": "git",
-        "url": "https://github.com/getanewsletter/api-php"
-    }
-],
 "require": {
-    "getanewsletter/api-php": "master"
+    "getanewsletter/api-php": "0.1.0"
 }
 ```
 
