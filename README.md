@@ -14,11 +14,9 @@ Installation
 If your project is supporting [Composer](https://getcomposer.org/) you may use the following in your composer.json file:
 ```json
 "require": {
-    "getanewsletter/api-php": "0.1.0"
+    "getanewsletter/api-php": "0.1.1"
 }
 ```
-
-For manual installation you have to obtain the [api-php-0.1.0.phar]() and drop it somewhere in your project. Then use ```require "api-php-1.0.1.phar"``` to make it's functionality available.
 
 Usage
 -----
