@@ -13,7 +13,8 @@ class ContactManager extends EntityManager
         'attributes',
         'first_name',
         'last_name',
-        'lists'
+        'lists',
+        'email'
     ];
     protected $lookupField = 'email';
 
