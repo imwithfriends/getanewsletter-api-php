@@ -32,7 +32,8 @@ class ContactTests extends PHPUnit_Framework_TestCase
             'last_name' => null,
             'lists' => [
                 clone $returnedList
-            ]
+            ],
+            'email' => 'test@example.com'
         ];
 
         $this->apiMock->expects($this->any())
